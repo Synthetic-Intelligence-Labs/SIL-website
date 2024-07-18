@@ -1,0 +1,8 @@
+@font-face {
+	font-family: 'conthraxsemibold';
+	src: url(../../assets/fonts/conthraxsemibold-889437db88f91b0caf03f828e2d046ac.woff2) format('woff2'),
+	url(../../assets/fonts/conthraxsemibold-262c0878dc1bab3201e8af00652cef3e.woff) format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: auto;
+}
