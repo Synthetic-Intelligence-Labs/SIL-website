@@ -25,7 +25,6 @@ jobs:
         echo "    <changefreq>daily</changefreq>" >> sitemap.xml
         echo "    <priority>1.0</priority>" >> sitemap.xml
         echo "  </url>" >> sitemap.xml
-        # Add additional URLs if needed
         echo "</urlset>" >> sitemap.xml
       shell: bash
 
