@@ -18,9 +18,9 @@ jobs:
     - name: Update sitemap
       run: |
         echo "<?xml version='1.0' encoding='UTF-8'?>" > sitemap.xml
-        echo "<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>" >> sitemap.xml
+        echo "<urlset xmlns='https://www.sitemaps.org/schemas/sitemap/0.9'>" >> sitemap.xml
         echo "  <url>" >> sitemap.xml
-        echo "    <loc>https://synthetic-intelligence-labs.github.io/SIL-website/</loc>" >> sitemap.xml
+        echo "    <loc>https://www.syntheticintelligencelabs.com/</loc>" >> sitemap.xml
         echo "    <lastmod>$(date --utc +%Y-%m-%dT%H:%M:%S+00:00)</lastmod>" >> sitemap.xml
         echo "    <changefreq>daily</changefreq>" >> sitemap.xml
         echo "    <priority>1.0</priority>" >> sitemap.xml
@@ -28,32 +28,120 @@ jobs:
         echo "</urlset>" >> sitemap.xml
       shell: bash
 
-    - name: Update index.html with sitemap reference
+    - name: Generate robots.txt
+      run: |
+        echo "User-agent: *" > robots.txt
+        echo "Disallow:" >> robots.txt
+        echo "Sitemap: https://www.syntheticintelligencelabs.com/sitemap.xml" >> robots.txt
+      shell: bash
+
+    - name: Update index.html with SEO and sitemap reference
       run: |
         sed -i '/<\/head>/i <link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml" />' index.html
+        sed -i '/<\/head>/i <meta name="description" content="Synthetic Intelligence Labs specializes in bio-silicon intelligence systems, integrating biological principles with advanced computing for innovative AI solutions.">' index.html
+        sed -i '/<\/head>/i <meta name="keywords" content="bio-silicon, intelligence systems, AI, computational neuroscience, sustainable technology, brain-computer interface, government funding, public funding, innovative technology">' index.html
+        sed -i '/<\/head>/i <meta name="author" content="Synthetic Intelligence Labs">' index.html
+        sed -i '/<\/head>/i <meta name="robots" content="index, follow">' index.html
+        sed -i '/<\/head>/i <meta property="og:title" content="Synthetic Intelligence Labs - Leading Bio-Silicon Intelligence Systems">' index.html
+        sed -i '/<\/head>/i <meta property="og:description" content="Explore the innovations in bio-silicon intelligence systems at Synthetic Intelligence Labs. Discover our cutting-edge AI solutions.">' index.html
+        sed -i '/<\/head>/i <meta property="og:url" content="https://www.syntheticintelligencelabs.com">' index.html
+        sed -i '/<\/head>/i <meta property="og:image" content="https://www.syntheticintelligencelabs.com/images/og-image.jpg">' index.html
+        sed -i '/<\/head>/i <meta property="og:type" content="website">' index.html
+        sed -i '/<\/head>/i <meta name="twitter:card" content="summary_large_image">' index.html
+        sed -i '/<\/head>/i <meta name="twitter:title" content="Synthetic Intelligence Labs - Leading Bio-Silicon Intelligence Systems">' index.html
+        sed -i '/<\/head>/i <meta name="twitter:description" content="Explore the innovations in bio-silicon intelligence systems at Synthetic Intelligence Labs. Discover our cutting-edge AI solutions.">' index.html
+        sed -i '/<\/head>/i <meta name="twitter:image" content="https://www.syntheticintelligencelabs.com/images/twitter-image.jpg">' index.html
+        sed -i '/<\/head>/i <link rel="canonical" href="https://www.syntheticintelligencelabs.com/">' index.html
+        sed -i 's/https:\/\/synthetic-intelligence-labs.github.io\/SIL-website\//https:\/\/www.syntheticintelligencelabs.com\//g' index.html
+      shell: bash
+
+    - name: Create structured data (JSON-LD)
+      run: |
+        echo '<script type="application/ld+json">' > structured-data.json
+        echo '{' >> structured-data.json
+        echo '"@context": "https://schema.org",' >> structured-data.json
+        echo '"@type": "Organization",' >> structured-data.json
+        echo '"name": "Synthetic Intelligence Labs",' >> structured-data.json
+        echo '"url": "https://www.syntheticintelligencelabs.com",' >> structured-data.json
+        echo '"logo": "https://www.syntheticintelligencelabs.com/images/logo.png",' >> structured-data.json
+        echo '"sameAs": [' >> structured-data.json
+        echo '"https://www.linkedin.com/company/syntheticintelligence",' >> structured-data.json
+        echo '"https://twitter.com/syntheticintelligence",' >> structured-data.json
+        echo '"https://www.facebook.com/syntheticintelligence"' >> structured-data.json
+        echo '],' >> structured-data.json
+        echo '"contactPoint": [{' >> structured-data.json
+        echo '"@type": "ContactPoint",' >> structured-data.json
+        echo '"telephone": "+1-800-555-5555",' >> structured-data.json
+        echo '"contactType": "Customer Service"' >> structured-data.json
+        echo '}],' >> structured-data.json
+        echo '"description": "Synthetic Intelligence Labs specializes in bio-silicon intelligence systems, integrating biological principles with advanced computing for innovative AI solutions."' >> structured-data.json
+        echo '}' >> structured-data.json
+        echo '</script>' >> structured-data.json
+      shell: bash
+
+    - name: Update index.html with structured data
+      run: |
+        sed -i '/<\/head>/i <script type="application/ld+json">' index.html
+        cat structured-data.json >> index.html
+        sed -i '/<\/head>/i </script>' index.html
       shell: bash
 
     - name: Commit and push changes
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git add README.md sitemap.xml index.html
-        git commit -m "Update README, sitemap, and index.html"
+        git add README.md sitemap.xml robots.txt index.html structured-data.json
+        git commit -m "Update README, sitemap, robots.txt, index.html, and add structured data for SEO"
         git push
 
     - name: Ping search engines
       run: |
-        curl -s "http://www.google.com/ping?sitemap=https://synthetic-intelligence-labs.github.io/SIL-website/sitemap.xml"
-        curl -s "http://www.bing.com/ping?sitemap=https://synthetic-intelligence-labs.github.io/SIL-website/sitemap.xml"
-        curl -s "http://www.duckduckgo.com/ping?sitemap=https://synthetic-intelligence-labs.github.io/SIL-website/sitemap.xml"
-        curl -s "http://www.yandex.com/ping?sitemap=https://synthetic-intelligence-labs.github.io/SIL-website/sitemap.xml"
-        curl -s "http://www.baidu.com/ping?sitemap=https://synthetic-intelligence-labs.github.io/SIL-website/sitemap.xml"
-        curl -s "http://www.sogou.com/ping?sitemap=https://synthetic-intelligence-labs.github.io/SIL-website/sitemap.xml"
-        curl -s "http://www.so.com/ping?sitemap=https://synthetic-intelligence-labs.github.io/SIL-website/sitemap.xml"
-        curl -s "https://search.mail.ru/ping?sitemap=https://synthetic-intelligence-labs.github.io/SIL-website/sitemap.xml"
+        curl -s "https://www.google.com/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://www.bing.com/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://www.duckduckgo.com/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://www.yandex.com/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://www.baidu.com/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://www.sogou.com/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://www.so.com/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://search.mail.ru/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
       shell: bash
 
     - name: Ping academic search engines
       run: |
-        curl -s "http://www.scholar.google.com/ping?sitemap=https://synthetic-intelligence-labs.github.io/SIL-website/sitemap.xml"
+        curl -s "https://www.scholar.google.com/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "http://export.arxiv.org/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://www.base-search.net/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://citeseerx.ist.psu.edu/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://core.ac.uk/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://pubmed.ncbi.nlm.nih.gov/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+      shell: bash
+
+    - name: Monitor site performance with Lighthouse
+      uses: actions/github-script@v4
+      with:
+        script: |
+          const { context } = require('@actions/github');
+          const lighthouse = require('lighthouse');
+          const chromeLauncher = require('chrome-launcher');
+
+          (async () => {
+            const chrome = await chromeLauncher.launch({ chromeFlags: ['--headless'] });
+            const options = { logLevel: 'info', output: 'json', onlyCategories: ['performance'], port: chrome.port };
+            const runnerResult = await lighthouse('https://www.syntheticintelligencelabs.com', options);
+
+            const report = runnerResult.report;
+            fs.writeFileSync('lighthouse-report.json', report);
+
+            console.log('Performance score was', runnerResult.lhr.categories.performance.score * 100);
+
+            await chrome kill();
+          })();
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Commit and push Lighthouse report
+      run: |
+        git add lighthouse-report.json
+        git commit -m "Add Lighthouse performance report"
+        git push
       shell: bash
