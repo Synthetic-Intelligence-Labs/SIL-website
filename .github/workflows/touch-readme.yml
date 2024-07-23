@@ -18,9 +18,9 @@ jobs:
     - name: Update sitemap
       run: |
         echo "<?xml version='1.0' encoding='UTF-8'?>" > sitemap.xml
-        echo "<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>" >> sitemap.xml
+        echo "<urlset xmlns='https://www.sitemaps.org/schemas/sitemap/0.9'>" >> sitemap.xml
         echo "  <url>" >> sitemap.xml
-        echo "    <loc>http://www.syntheticintelligencelabs.com/</loc>" >> sitemap.xml
+        echo "    <loc>https://www.syntheticintelligencelabs.com/</loc>" >> sitemap.xml
         echo "    <lastmod>$(date --utc +%Y-%m-%dT%H:%M:%S+00:00)</lastmod>" >> sitemap.xml
         echo "    <changefreq>daily</changefreq>" >> sitemap.xml
         echo "    <priority>1.0</priority>" >> sitemap.xml
@@ -32,7 +32,7 @@ jobs:
       run: |
         echo "User-agent: *" > robots.txt
         echo "Disallow:" >> robots.txt
-        echo "Sitemap: http://www.syntheticintelligencelabs.com/sitemap.xml" >> robots.txt
+        echo "Sitemap: https://www.syntheticintelligencelabs.com/sitemap.xml" >> robots.txt
       shell: bash
 
     - name: Update index.html with SEO and sitemap reference
@@ -44,15 +44,15 @@ jobs:
         sed -i '/<\/head>/i <meta name="robots" content="index, follow">' index.html
         sed -i '/<\/head>/i <meta property="og:title" content="Synthetic Intelligence Labs - Leading Bio-Silicon Intelligence Systems">' index.html
         sed -i '/<\/head>/i <meta property="og:description" content="Explore the innovations in bio-silicon intelligence systems at Synthetic Intelligence Labs. Discover our cutting-edge AI solutions.">' index.html
-        sed -i '/<\/head>/i <meta property="og:url" content="http://www.syntheticintelligencelabs.com">' index.html
-        sed -i '/<\/head>/i <meta property="og:image" content="http://www.syntheticintelligencelabs.com/images/og-image.jpg">' index.html
+        sed -i '/<\/head>/i <meta property="og:url" content="https://www.syntheticintelligencelabs.com">' index.html
+        sed -i '/<\/head>/i <meta property="og:image" content="https://www.syntheticintelligencelabs.com/images/og-image.jpg">' index.html
         sed -i '/<\/head>/i <meta property="og:type" content="website">' index.html
         sed -i '/<\/head>/i <meta name="twitter:card" content="summary_large_image">' index.html
         sed -i '/<\/head>/i <meta name="twitter:title" content="Synthetic Intelligence Labs - Leading Bio-Silicon Intelligence Systems">' index.html
         sed -i '/<\/head>/i <meta name="twitter:description" content="Explore the innovations in bio-silicon intelligence systems at Synthetic Intelligence Labs. Discover our cutting-edge AI solutions.">' index.html
-        sed -i '/<\/head>/i <meta name="twitter:image" content="http://www.syntheticintelligencelabs.com/images/twitter-image.jpg">' index.html
-        sed -i '/<\/head>/i <link rel="canonical" href="http://www.syntheticintelligencelabs.com/">' index.html
-        sed -i 's/https:\/\/synthetic-intelligence-labs.github.io\/SIL-website\//http:\/\/www.syntheticintelligencelabs.com\//g' index.html
+        sed -i '/<\/head>/i <meta name="twitter:image" content="https://www.syntheticintelligencelabs.com/images/twitter-image.jpg">' index.html
+        sed -i '/<\/head>/i <link rel="canonical" href="https://www.syntheticintelligencelabs.com/">' index.html
+        sed -i 's/https:\/\/synthetic-intelligence-labs.github.io\/SIL-website\//https:\/\/www.syntheticintelligencelabs.com\//g' index.html
       shell: bash
 
     - name: Create structured data (JSON-LD)
@@ -62,8 +62,8 @@ jobs:
         echo '"@context": "https://schema.org",' >> structured-data.json
         echo '"@type": "Organization",' >> structured-data.json
         echo '"name": "Synthetic Intelligence Labs",' >> structured-data.json
-        echo '"url": "http://www.syntheticintelligencelabs.com",' >> structured-data.json
-        echo '"logo": "http://www.syntheticintelligencelabs.com/images/logo.png",' >> structured-data.json
+        echo '"url": "https://www.syntheticintelligencelabs.com",' >> structured-data.json
+        echo '"logo": "https://www.syntheticintelligencelabs.com/images/logo.png",' >> structured-data.json
         echo '"sameAs": [' >> structured-data.json
         echo '"https://www.linkedin.com/company/syntheticintelligence",' >> structured-data.json
         echo '"https://twitter.com/syntheticintelligence",' >> structured-data.json
@@ -96,24 +96,24 @@ jobs:
 
     - name: Ping search engines
       run: |
-        curl -s "http://www.google.com/ping?sitemap=http://www.syntheticintelligencelabs.com/sitemap.xml"
-        curl -s "http://www.bing.com/ping?sitemap=http://www.syntheticintelligencelabs.com/sitemap.xml"
-        curl -s "http://www.duckduckgo.com/ping?sitemap=http://www.syntheticintelligencelabs.com/sitemap.xml"
-        curl -s "http://www.yandex.com/ping?sitemap=http://www.syntheticintelligencelabs.com/sitemap.xml"
-        curl -s "http://www.baidu.com/ping?sitemap=http://www.syntheticintelligencelabs.com/sitemap.xml"
-        curl -s "http://www.sogou.com/ping?sitemap=http://www.syntheticintelligencelabs.com/sitemap.xml"
-        curl -s "http://www.so.com/ping?sitemap=http://www.syntheticintelligencelabs.com/sitemap.xml"
-        curl -s "https://search.mail.ru/ping?sitemap=http://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://www.google.com/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://www.bing.com/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://www.duckduckgo.com/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://www.yandex.com/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://www.baidu.com/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://www.sogou.com/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://www.so.com/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://search.mail.ru/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
       shell: bash
 
     - name: Ping academic search engines
       run: |
-        curl -s "http://www.scholar.google.com/ping?sitemap=http://www.syntheticintelligencelabs.com/sitemap.xml"
-        curl -s "http://export.arxiv.org/ping?sitemap=http://www.syntheticintelligencelabs.com/sitemap.xml"
-        curl -s "http://www.base-search.net/ping?sitemap=http://www.syntheticintelligencelabs.com/sitemap.xml"
-        curl -s "http://citeseerx.ist.psu.edu/ping?sitemap=http://www.syntheticintelligencelabs.com/sitemap.xml"
-        curl -s "http://core.ac.uk/ping?sitemap=http://www.syntheticintelligencelabs.com/sitemap.xml"
-        curl -s "http://pubmed.ncbi.nlm.nih.gov/ping?sitemap=http://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://www.scholar.google.com/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "http://export.arxiv.org/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://www.base-search.net/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://citeseerx.ist.psu.edu/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://core.ac.uk/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://pubmed.ncbi.nlm.nih.gov/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
       shell: bash
 
     - name: Monitor site performance with Lighthouse
@@ -127,14 +127,14 @@ jobs:
           (async () => {
             const chrome = await chromeLauncher.launch({ chromeFlags: ['--headless'] });
             const options = { logLevel: 'info', output: 'json', onlyCategories: ['performance'], port: chrome.port };
-            const runnerResult = await lighthouse('http://www.syntheticintelligencelabs.com', options);
+            const runnerResult = await lighthouse('https://www.syntheticintelligencelabs.com', options);
 
             const report = runnerResult.report;
             fs.writeFileSync('lighthouse-report.json', report);
 
             console.log('Performance score was', runnerResult.lhr.categories.performance.score * 100);
 
-            await chrome.kill();
+            await chrome kill();
           })();
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
