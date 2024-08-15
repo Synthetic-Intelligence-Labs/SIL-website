@@ -138,6 +138,7 @@ jobs:
         curl -s "https://www.scopus.com/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
         curl -s "https://www.webofscience.com/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
         curl -s "https://ieeexplore.ieee.org/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
+        curl -s "https://www.darpa.mil/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
         curl -s "https://pubmed.ncbi.nlm.nih.gov/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
         curl -s "https://www.sciencedirect.com/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
         curl -s "https://www.jstor.org/ping?sitemap=https://www.syntheticintelligencelabs.com/sitemap.xml"
