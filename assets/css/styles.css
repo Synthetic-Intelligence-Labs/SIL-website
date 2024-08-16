@@ -1,0 +1,106 @@
+
+/* Initially set the page to be fully black */
+body {
+  opacity: 0;
+  background-color: black;
+  transition: opacity 2s ease-in-out;
+}
+
+/* Once the page is ready, fade in */
+body.loaded {
+  opacity: 1;
+}
+/* Reset all elements to black background globally */
+* {
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+}
+
+/* Apply black background to all major layout containers */
+html, body, div, section, header, footer, nav, article, aside, main, figure, figcaption, blockquote, form, input, textarea, select, option, ul, ol, li, table, th, td {
+  background-color: #000000 !important;
+}
+
+/* Ensure no nested divs introduce grey */
+div, span, section, article, header, footer, main {
+  background-color: #000000 !important;
+}
+
+/* Override Bootstrap's row and container classes */
+.container, .container-fluid, .row, .col, .card, .card-body, .card-header, .navbar, .footer {
+  background-color: #000000 !important;
+}
+
+/* Target Bootstrap's grid system */
+[class^="col-"] {
+  background-color: #000000 !important;
+}
+
+/* Target any classes that could be setting backgrounds */
+[class*="bg-"], [class*="bg-light"], [class*="bg-dark"], [class*="bg-secondary"], [class*="bg-muted"] {
+  background-color: #000000 !important;
+}
+
+/* Target pseudo-elements that may be adding grey areas */
+*::before, *::after {
+  background-color: #000000 !important;
+}
+
+/* Fix any lingering buttons or input fields */
+button, input, select, textarea {
+  background-color: #000000 !important;
+}
+
+/* Override potential grey in icons and SVGs */
+svg, path, g, use {
+  fill: #d3d3d3 !important; /* Retain icon color consistency */
+}
+
+/* Ensure borders and shadows don’t introduce grey */
+* {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Address any text or link color issues */
+h1, h2, h3, h4, h5, h6, p, a, span, .text-light-gray, .text-muted, .text-white, .text-primary {
+  color: rgb(211, 211, 211) !important;
+}
+
+/* Adjust form element styles */
+input, textarea, select, button {
+  color: rgb(211, 211, 211) !important;
+  background-color: #000000 !important;
+}
+
+/* Ensure consistency in buttons */
+.btn, .btn-white {
+  background-color: #000000 !important;
+  color: rgb(211, 211, 211) !important;
+}
+
+/* Make sure all cards have a black background */
+.card, .card-body, .card-header, .card-footer {
+  background-color: #000000 !important;
+}
+
+/* Override any container-specific backgrounds */
+.container * {
+  background-color: #000000 !important;
+}
+
+#loading-spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  text-align: center;
+}
